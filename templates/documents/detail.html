@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle documento{% endblock %}
+
+{% block content %}
+  <h1>{{ document.original_filename }}</h1>
+  <p><strong>Estado:</strong> {{ document.status }}</p>
+  <p><strong>Subido por:</strong> {{ document.uploaded_by.username }}</p>
+  <p><strong>Subido el:</strong> {{ document.uploaded_at|date:"Y-m-d H:i" }}</p>
+  <p><strong>Tamaño:</strong> {{ document.size_bytes }} bytes</p>
+  <p><strong>SHA256:</strong> {{ document.sha256 }}</p>
+  {% if document.error_message %}
+    <p><strong>Error:</strong> {{ document.error_message }}</p>
+  {% endif %}
+  <a href="{% url 'documents:download' document.id %}">Descargar</a>
+{% endblock %}
